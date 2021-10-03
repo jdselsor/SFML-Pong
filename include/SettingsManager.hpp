@@ -6,6 +6,33 @@ namespace sfml_pong
 {
     struct Settings
     {
+        // Should know this, but forgot it and filled the logic tables for fun.
+        
+        // 1 is true and 0 is false.
+        //
+        // not 1 is 0.
+        // not 0 is 1.
+
+        // 1 and 1 is 1.
+        // 1 and 0 is 0.
+        // 0 and 1 is 0.
+        // 0 and 0 is 0.
+
+        // 1 or 1 is 1.
+        // 1 or 0 is 1.
+        // 0 or 1 is 1.
+        // 0 or 0 is 0.
+
+        // 1 xor 1 is 0.
+        // 1 xor 0 is 1.
+        // 0 xor 1 is 1.
+        // 0 xor 0 is 0.
+
+        // 1 -> 1 is 1.
+        // 1 -> 0 is 0.
+        // 0 -> 1 is 1.
+        // 0 -> 0 is 1.
+
         uint8_t fullscreen;
         uint32_t width, height;
         uint32_t vSync;
