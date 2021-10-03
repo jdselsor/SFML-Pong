@@ -1,0 +1,7 @@
+{
+    "fullscreen" : 1,
+    "width": 800,
+    "height": 600,
+    "vSync": 0,
+    "antialiasing": 8
+}

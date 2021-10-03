@@ -1,0 +1,9 @@
+targets:
+    Debug:
+        cmd: "g++ -c src/*.cpp -std=c++14 -m64 -g -Wall -I include && g++ *.o -o build/debug/main -lsfml-graphics -lsfml-window -lsfml-system -ljsoncpp && ./build/debug/main"
+        #cwd: project_path
+        sh: true
+    Release:
+        cmd: "g++ -c src/*.cpp -std=c++14 -m64 -O3 -g -Wall -I include && g++ *.o -o build/release/main -s -lsfml-graphics -lsfml-window -lsfml-system -ljsoncpp && ./build/release/main"
+        #cwd: project_path
+        sh: true
