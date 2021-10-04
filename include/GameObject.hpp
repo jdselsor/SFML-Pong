@@ -37,13 +37,42 @@ namespace sfml_pong{
             //      radius (float): The radius of the ball.
             Ball (float x, float y, float radius);
 
+            // Renders the ball to the screen.
+            //
+            // Parameter
+            //      window (&RenderWindow): the window to render the ball to.
             void render(sf::RenderWindow &window);
+
+            // Updates the ball.
             void update();
 
+            // Moves the fall using the shapes.move(x, y) function. This is relative to the current position.
+            // It also updates the m_x, and m_y variables.
+            //
+            // Parameter
+            //      x (float): The x value to move the ball.
+            //      y (float): The y value to move the ball.
             void move (float x, float y);
+
+            // Sets the color of the ball.
+            //
+            // Parameter
+            //      r (uint8_t): The red value of the color.
+            //      g (uint8_t): The green value of the color.
+            //      b (uint8_t): The blue value of the color.
             void setColor (uint8_t r, uint8_t g, uint8_t b);
 
+            // Sets the direction of the ball. TODO: add check to insure x and y are -1, 0, 1 only.
+            //
+            // Parameter
+            //      x (float): The x direction for the ball.
+            //      y (float): The y direction for the ball.
             void setDirection (float x, float y);
+
+            // Sets the ball's speed. Will be used to speed up the ball.
+            //
+            // Parameter
+            //      speed (float): The new speed for the ball.
             void setSpeed (float speed);
         private:
             float m_x, m_y;
