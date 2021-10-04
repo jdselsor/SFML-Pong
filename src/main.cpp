@@ -26,6 +26,7 @@ int main ()
     window.setVerticalSyncEnabled(settings.vSync);
 
     sfml_pong::Ball ball (width / 2 - 5, height / 2 - 5, 5.0f);
+    sfml_pong::Paddle playerPaddle (15, height / 2 - 50, 15, 100);
 
     while (window.isOpen() && gameRunning)
     {
@@ -48,9 +49,11 @@ int main ()
 
         // Update Entities
         ball.update();
+        playerPaddle.update();
 
         // Render Entities
         ball.render(window);
+        playerPaddle.render(window);
 
         window.display();
     }
