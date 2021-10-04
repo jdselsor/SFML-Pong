@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "SettingsManager.hpp"
+#include "GameObject.hpp"
 
 int main ()
 {
@@ -24,6 +25,8 @@ int main ()
     sf::RenderWindow window (sf::VideoMode (width, height), "My Window", (settings.fullscreen == true) ? sf::Style::Fullscreen : sf::Style::Default, conextSettings);
     window.setVerticalSyncEnabled(settings.vSync);
 
+    sfml_pong::Ball ball (width / 2 - 5, height / 2 - 5, 5.0f);
+
     while (window.isOpen() && gameRunning)
     {
         sf::Event event;
@@ -36,16 +39,18 @@ int main ()
             }
         }
 
-        window.clear();
-
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {
             gameRunning = false;
         }
 
+        window.clear();
+
         // Update Entities
+        ball.update();
 
         // Render Entities
+        ball.render(window);
 
         window.display();
     }
