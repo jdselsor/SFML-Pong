@@ -5,61 +5,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-namespace sfml_pong{
-    // This should be a generic paddle. The Player paddle should inherit from this.
-    class Paddle
-    {
-        public:
-            // The paddle constructor. It creates a new paddle at the position
-            // x, y with a size of width height.
-            //
-            // Parameter
-            //      x (float): The x position of the paddle.
-            //      y (float): The y position of the paddle.
-            //      width (float): The width of the paddle.
-            //      height (float): The height of the paddle.
-            Paddle (float x, float y, float width, float height);
-
-            virtual void render(sf::RenderWindow &window);
-            virtual void update ();
-
-            // Moves the paddle using the RectangleShape.move(x, y) and updates
-            // The position vector.
-            //
-            // Parameter
-            //      x (float): The x value to move the paddle.
-            //      y (float): The y value to move the paddle.
-            virtual void move (float x, float y);
-
-            // Sets the color of the paddle.
-            //
-            // Parameter
-            //      r (uint8_t): The red value of the color.
-            //      g (uint8_t): The green value of the color.
-            //      b (uint8_t): The blue value of the color.
-            virtual void setColor (uint8_t r, uint8_t g, uint8_t b);
-
-            // Sets the speed of the paddle.
-            //
-            // Parameter
-            //      speed (float): The speed to move the paddle.
-            virtual void setSpeed (float speed);
-        private:
-            sf::Vector2f m_position;
-            sf::Vector2f m_size;
-
-            float m_speed;
-
-            sf::RectangleShape m_rect;
-            uint32_t m_color;
-    };
-
-    class AIPaddle : public Paddle
-    {};
-
-    class PlayerPaddle : public Paddle
-    {};
-
+namespace sfml_pong
+{
     class Ball
     {
         public:
@@ -111,6 +58,8 @@ namespace sfml_pong{
             // Parameter
             //      speed (float): The new speed for the ball.
             void setSpeed (float speed);
+
+            sf::Vector2f getPosition() {return m_position;}
         private:
             sf::Vector2f m_position;
             float m_radius;
@@ -120,5 +69,35 @@ namespace sfml_pong{
 
             sf::Vector2f m_direction;
             float m_speed;
+    };
+
+    class Paddle {
+        public:
+            Paddle (float x, float y, float width, float height);
+
+            virtual void render (sf::RenderWindow &window);
+            virtual void update ();
+
+            virtual void move (float x, float y);
+
+            void setColor (uint8_t r, uint8_t g, uint8_t b);
+
+            sf::Vector2f getPosition ();
+            sf::Vector2f getSize ();
+
+            void setSpeed (float speed);
+            float getSpeed ();
+        protected:
+            sf::Vector2f m_position;
+            sf::Vector2f m_size;
+
+            sf::RectangleShape m_rect;
+            uint32_t m_color;
+
+            float m_speed;
+    };
+
+    class AIPaddle : public Paddle {
+        AIPaddle (float x, float y, float width, float height) : Paddle (x, y, width, height){};
     };
 }

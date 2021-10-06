@@ -5,35 +5,6 @@
 
 #include "GameObject.hpp"
 
-sfml_pong::Paddle::Paddle (float x, float y, float width, float height)
-{
-    m_position.x = x;
-    m_position.y = y;
-
-    m_size.x = width;
-    m_size.y = height;
-
-    m_rect = sf::RectangleShape (m_size);
-    m_rect.setPosition (m_position.x, m_position.y);
-
-    m_speed = 3.5f;
-
-    setColor (255, 255, 255);
-}
-
-void sfml_pong::Paddle::render(sf::RenderWindow &window)
-{
-    window.draw(m_rect);
-}
-
-void sfml_pong::Paddle::update ()
-{}
-
-void sfml_pong::Paddle::setColor(uint8_t r, uint8_t g, uint8_t b)
-{
-    m_rect.setFillColor(sf::Color(r, g, b));
-}
-
 sfml_pong::Ball::Ball (float x, float y, float radius)
 {
     m_position.x = x;
@@ -82,4 +53,60 @@ void sfml_pong::Ball::move (float x, float y)
 void sfml_pong::Ball::setColor(uint8_t r, uint8_t g, uint8_t b)
 {
     m_circle.setFillColor(sf::Color(r, g, b));
+}
+
+sfml_pong::Paddle::Paddle (float x, float y, float width, float height)
+{
+    m_position.x = x;
+    m_position.y = y;
+    m_size.x = width;
+    m_size.y = height;
+
+    m_rect = sf::RectangleShape(m_size);
+    m_rect.setPosition(m_position);
+
+    m_speed = 3.5f;
+}
+
+void sfml_pong::Paddle::render (sf::RenderWindow &window)
+{
+    window.draw(m_rect);
+}
+
+void sfml_pong::Paddle::update ()
+{
+    uint8_t canMove = 1;
+
+    if (m_position.y < 0)
+    {
+        canMove = 0;
+    }
+
+    if (m_position.y > 800)
+    {
+        canMove = 0;
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && canMove)
+    {
+        move(0.0f, -m_speed);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && canMove)
+    {
+        move(0.0f, m_speed);
+    }
+
+    canMove = 1;
+}
+
+void sfml_pong::Paddle::move (float x, float y)
+{
+    m_rect.move(x, y);
+    m_position.x = m_rect.getPosition().x;
+    m_position.y = m_rect.getPosition().y;
+}
+
+sf::Vector2f sfml_pong::Paddle::getPosition ()
+{
+    return m_position;
 }
